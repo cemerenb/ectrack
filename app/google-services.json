@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "935942071067",
+    "project_id": "ectrack-d568d",
+    "storage_bucket": "ectrack-d568d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935942071067:android:1e49a13b20d8deb41929be",
+        "android_client_info": {
+          "package_name": "com.app.ectrack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXFT_DiJ44xvADabZYJDKwcWPjo23qu1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
