@@ -102,7 +102,6 @@
                 android:padding="16dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Şifre Tekrar Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPasswordInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

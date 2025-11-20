@@ -49,6 +49,7 @@ public class RoleSelectionActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(RoleSelectionActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

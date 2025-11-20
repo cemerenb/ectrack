@@ -8,7 +8,6 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -40,15 +39,12 @@
                     android:orientation="vertical"
                     android:padding="24dp">
 
-
-
                     <TextView
                         android:id="@+id/pharmacyNameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="16dp"
-                        android:text="Eczane Adı"
+                        android:text="Yükleniyor..."
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -58,9 +54,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:text="Rol"
+                        android:text="..."
                         android:textSize="16sp" />
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -68,16 +63,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Hoş Geldiniz!"
+                android:text="İşlemler"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Eczane yönetim paneline başarıyla giriş yaptınız."
-                android:textSize="16sp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPrescribe"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="16dp"
+                android:text="Reçete Oluştur"
+                android:textSize="16sp"
+                app:icon="@android:drawable/ic_menu_edit"
+                app:cornerRadius="12dp"
+                android:backgroundTint="#00796B"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnQueryDrug"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:text="İlaç Sorgulama"
+                android:textSize="16sp"
+                app:icon="@android:drawable/ic_menu_search"
+                app:cornerRadius="12dp"
+                android:backgroundTint="#FF5722"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddStock"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:text="İlaç / Stok Ekle"
+                android:textSize="16sp"
+                app:icon="@android:drawable/ic_input_add"
+                app:cornerRadius="12dp"
+                android:backgroundTint="#512DA8"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/logoutButton"
