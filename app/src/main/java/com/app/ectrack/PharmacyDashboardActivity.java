@@ -4,16 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PharmacyDashboardActivity extends AppCompatActivity {
-
     private TextView pharmacyNameText;
     private MaterialButton logoutButton;
     private com.google.android.material.card.MaterialCardView cardMedicines;
@@ -79,9 +75,7 @@ public class PharmacyDashboardActivity extends AppCompatActivity {
                         }
                     }
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Bilgiler yüklenemedi", Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e -> Toast.makeText(this, "Kullanıcı bilgisi alınamadı", Toast.LENGTH_SHORT).show());
     }
 
     private void loadPharmacyInfo(String pharmacyId) {
@@ -89,13 +83,8 @@ public class PharmacyDashboardActivity extends AppCompatActivity {
                 .addOnSuccessListener(document -> {
                     if (document.exists()) {
                         String name = document.getString("name");
-                        if (name != null) {
-                            pharmacyNameText.setText(name);
-                        }
+                        if (name != null) pharmacyNameText.setText(name);
                     }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Eczane bilgileri yüklenemedi", Toast.LENGTH_SHORT).show();
                 });
     }
 
