@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private TextView welcomeText;
     private Button logoutButton;
+    private com.google.android.material.card.MaterialCardView cardMyMedicines;
+    private com.google.android.material.card.MaterialCardView cardFindPharmacy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,20 +27,53 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         displayUserInfo();
 
-        logoutButton.setOnClickListener(v -> logout());
+        setupClickListeners();
     }
 
     private void initViews() {
         welcomeText = findViewById(R.id.welcomeText);
         logoutButton = findViewById(R.id.logoutButton);
+        cardMyMedicines = findViewById(R.id.cardMyMedicines);
+        cardFindPharmacy = findViewById(R.id.cardFindPharmacy);
     }
 
     private void displayUserInfo() {
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
-            String email = user.getEmail();
-            welcomeText.setText("Hoş geldiniz!\n" + email);
+
+            com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(user.getUid())
+                    .get()
+                    .addOnSuccessListener(document -> {
+                        if (document.exists()) {
+                            String fullName = document.getString("fullName");
+                            if (fullName != null && !fullName.isEmpty()) {
+                                welcomeText.setText("Hoş geldiniz, " + fullName);
+                            } else {
+                                welcomeText.setText("Hoş geldiniz, " + user.getEmail());
+                            }
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+
+                        welcomeText.setText("Hoş geldiniz, " + user.getEmail());
+                    });
         }
+    }
+
+    private void setupClickListeners() {
+        logoutButton.setOnClickListener(v -> logout());
+
+        cardMyMedicines.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, PatientMedicineListActivity.class);
+            startActivity(intent);
+        });
+
+        cardFindPharmacy.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, PharmacySearchActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void logout() {

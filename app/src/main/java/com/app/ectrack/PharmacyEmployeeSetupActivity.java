@@ -86,10 +86,12 @@ public class PharmacyEmployeeSetupActivity extends AppCompatActivity {
     private void joinPharmacy(String pharmacyId, String invitationId) {
         String userId = auth.getCurrentUser().getUid();
         String email = auth.getCurrentUser().getEmail();
+        String name = auth.getCurrentUser().getDisplayName();
 
         Map<String, Object> user = new HashMap<>();
         user.put("userId", userId);
         user.put("email", email);
+        user.put("fullName", name != null ? name : "İsimsiz");
         user.put("userType", "pharmacy_employee");
         user.put("pharmacyId", pharmacyId);
         user.put("role", "employee");
@@ -109,6 +111,8 @@ public class PharmacyEmployeeSetupActivity extends AppCompatActivity {
         Map<String, Object> employee = new HashMap<>();
         employee.put("userId", userId);
         employee.put("email", auth.getCurrentUser().getEmail());
+        employee.put("fullName",
+                auth.getCurrentUser().getDisplayName() != null ? auth.getCurrentUser().getDisplayName() : "İsimsiz");
         employee.put("role", "employee");
         employee.put("joinedAt", com.google.firebase.Timestamp.now());
         employee.put("status", "active");

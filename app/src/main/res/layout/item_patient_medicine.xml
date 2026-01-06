@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="İlaç Adı"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Yazılma Tarihi"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+
+        
+        <LinearLayout
+            android:id="@+id/layoutDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="12dp"
+            android:background="#F5F5F5"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/textDosage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Doz: -"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Süre: -"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Kullanım: -"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        
+        <TextView
+            android:id="@+id/textExpandHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Detaylar için tıklayın ▼"
+            android:textSize="12sp"
+            android:textColor="#1976D2"
+            android:gravity="center" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+

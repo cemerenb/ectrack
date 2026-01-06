@@ -17,7 +17,6 @@ public class PharmacyOwnerSetupActivity extends AppCompatActivity {
     private TextInputLayout inviteCodeLayout;
     private TextInputEditText inviteCodeInput;
     private MaterialButton verifyButton;
-    private MaterialButton skipButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public class PharmacyOwnerSetupActivity extends AppCompatActivity {
         inviteCodeLayout = findViewById(R.id.inviteCodeLayout);
         inviteCodeInput = findViewById(R.id.inviteCodeInput);
         verifyButton = findViewById(R.id.verifyButton);
-        skipButton = findViewById(R.id.skipButton);
     }
 
     private void setupClickListeners() {
@@ -41,9 +39,7 @@ public class PharmacyOwnerSetupActivity extends AppCompatActivity {
             validateInviteCode(code);
         });
 
-        skipButton.setOnClickListener(v -> {
-            navigateToPharmacyDetails();
-        });
+
     }
 
     private void validateInviteCode(String code) {

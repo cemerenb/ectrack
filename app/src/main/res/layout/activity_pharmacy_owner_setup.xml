@@ -7,11 +7,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="24dp">
-
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:hint="Davet Kodu (Opsiyonel)"
+            android:hint="Davet Kodu"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
@@ -52,6 +50,11 @@
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/verifyButton"
             android:layout_width="match_parent"
@@ -60,31 +63,6 @@
             android:text="Kodu Doğrula"
             android:textSize="16sp"
             app:cornerRadius="12dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:background="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Davet kodunuz yok mu?"
-            android:textSize="14sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/skipButton"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:text="Yeni Eczane Oluştur"
-            android:textSize="16sp"
-            app:cornerRadius="12dp"
-            app:strokeWidth="2dp" />
 
     </LinearLayout>
 </ScrollView>

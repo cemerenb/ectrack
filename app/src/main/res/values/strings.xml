@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ectrack</string>
+    <string-array name="medicine_types">
+        <item>Hap</item>
+        <item>Şurup</item>
+        <item>Krem</item>
+        <item>Saşe</item>
+        <item>İğne</item>
+        <item>Diğer</item>
+    </string-array>
 </resources>

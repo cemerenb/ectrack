@@ -61,6 +61,54 @@
             android:name=".MainActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".MedicineListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AddEditMedicineActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".EmployeeListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PharmacyEditActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PatientMedicineListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AddPatientMedicineActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PharmacySearchActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MedicineQueryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PrescribeMedicineActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AddStockActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MedicineDetailsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PrescriptionHistoryActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB4koMpaJ3CScHvlcxzGXoO-rvObLCoCIg" />

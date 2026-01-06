@@ -64,7 +64,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-
         backToLogin.setOnClickListener(v -> finish());
     }
 
@@ -130,8 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(
                                 RegisterActivity.this,
                                 errorMessage,
-                                Toast.LENGTH_LONG
-                        ).show();
+                                Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -148,15 +146,13 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(
                                 RegisterActivity.this,
                                 "Kayıt başarılı!",
-                                Toast.LENGTH_SHORT
-                        ).show();
+                                Toast.LENGTH_SHORT).show();
                         navigateToMainActivity();
                     } else {
                         Toast.makeText(
                                 RegisterActivity.this,
                                 "Profil güncellenemedi",
-                                Toast.LENGTH_SHORT
-                        ).show();
+                                Toast.LENGTH_SHORT).show();
                         navigateToMainActivity();
                     }
                 });
@@ -204,7 +200,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void navigateToMainActivity() {
-        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        Intent intent = new Intent(RegisterActivity.this, RoleSelectionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

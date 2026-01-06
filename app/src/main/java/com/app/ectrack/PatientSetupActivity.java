@@ -17,9 +17,11 @@ import java.util.Map;
 
 public class PatientSetupActivity extends AppCompatActivity {
 
+    private TextInputLayout identityNumberLayout;
     private TextInputLayout ageLayout;
     private TextInputLayout heightLayout;
     private TextInputLayout weightLayout;
+    private TextInputEditText identityNumberInput;
     private TextInputEditText ageInput;
     private TextInputEditText heightInput;
     private TextInputEditText weightInput;
@@ -41,9 +43,11 @@ public class PatientSetupActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        identityNumberLayout = findViewById(R.id.identityNumberLayout);
         ageLayout = findViewById(R.id.ageLayout);
         heightLayout = findViewById(R.id.heightLayout);
         weightLayout = findViewById(R.id.weightLayout);
+        identityNumberInput = findViewById(R.id.identityNumberInput);
         ageInput = findViewById(R.id.ageInput);
         heightInput = findViewById(R.id.heightInput);
         weightInput = findViewById(R.id.weightInput);
@@ -61,9 +65,20 @@ public class PatientSetupActivity extends AppCompatActivity {
     private boolean validateInputs() {
         boolean isValid = true;
 
+        String identityNumber = identityNumberInput.getText().toString().trim();
         String age = ageInput.getText().toString().trim();
         String height = heightInput.getText().toString().trim();
         String weight = weightInput.getText().toString().trim();
+
+        if (identityNumber.isEmpty()) {
+            identityNumberLayout.setError("T.C. Kimlik No gerekli");
+            isValid = false;
+        } else if (identityNumber.length() != 11) {
+            identityNumberLayout.setError("T.C. Kimlik No 11 haneli olmalıdır");
+            isValid = false;
+        } else {
+            identityNumberLayout.setError(null);
+        }
 
         if (age.isEmpty()) {
             ageLayout.setError("Yaş gerekli");
@@ -82,6 +97,7 @@ public class PatientSetupActivity extends AppCompatActivity {
                 isValid = false;
             }
         }
+
 
         if (height.isEmpty()) {
             heightLayout.setError("Boy gerekli");
@@ -128,6 +144,8 @@ public class PatientSetupActivity extends AppCompatActivity {
 
         String userId = auth.getCurrentUser().getUid();
         String email = auth.getCurrentUser().getEmail();
+        String name = auth.getCurrentUser().getDisplayName();
+        String identityNumber = identityNumberInput.getText().toString().trim();
         int age = Integer.parseInt(ageInput.getText().toString().trim());
         int height = Integer.parseInt(heightInput.getText().toString().trim());
         double weight = Double.parseDouble(weightInput.getText().toString().trim());
@@ -138,6 +156,8 @@ public class PatientSetupActivity extends AppCompatActivity {
         Map<String, Object> user = new HashMap<>();
         user.put("userId", userId);
         user.put("email", email);
+        user.put("fullName", name != null ? name : "İsimsiz");
+        user.put("identityNumber", identityNumber);
         user.put("userType", "patient");
         user.put("age", age);
         user.put("height", height);
