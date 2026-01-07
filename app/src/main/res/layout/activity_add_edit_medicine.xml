@@ -205,7 +205,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
-                android:text="Bu İlacı Sil"
+                android:text="İlacı Sil"
                 android:textColor="@android:color/holo_red_dark"
                 android:visibility="gone" />
 

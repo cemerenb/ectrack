@@ -93,8 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
         if (password.isEmpty()) {
             passwordInputLayout.setError("Şifre gerekli");
             isValid = false;
-        } else if (password.length() < 6) {
-            passwordInputLayout.setError("Şifre en az 6 karakter olmalı");
+        } else if (!AuthHelper.isPasswordValid(password)) {
+            passwordInputLayout.setError(
+                    "Şifre en az 8 karakter olmalı, en az bir büyük harf, bir küçük harf ve bir sayı içermelidir");
             isValid = false;
         } else {
             passwordInputLayout.setError(null);
@@ -125,11 +126,8 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     } else {
                         showLoading(false);
-                        String errorMessage = getErrorMessage(task.getException());
-                        Toast.makeText(
-                                RegisterActivity.this,
-                                errorMessage,
-                                Toast.LENGTH_LONG).show();
+                        String errorMessage = AuthHelper.formatFirebaseError(task.getException());
+                        AuthHelper.showErrorDialog(RegisterActivity.this, "Kayıt Hatası", errorMessage);
                     }
                 });
     }

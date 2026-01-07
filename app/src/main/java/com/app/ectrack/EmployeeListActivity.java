@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import com.google.firebase.firestore.FieldValue;
+import android.util.Log;
 
 public class EmployeeListActivity extends AppCompatActivity {
 
@@ -129,24 +131,63 @@ public class EmployeeListActivity extends AppCompatActivity {
     }
 
     private void generateInviteCode() {
+        // 1. Auth kontrolü
+        if (auth == null) {
+            Toast.makeText(this, "Auth nesnesi null!", Toast.LENGTH_SHORT).show();
+            Log.e("InviteCode", "Auth nesnesi null");
+            return;
+        }
+
+        if (auth.getCurrentUser() == null) {
+            Toast.makeText(this, "Kullanıcı oturumu yok!", Toast.LENGTH_SHORT).show();
+            Log.e("InviteCode", "getCurrentUser() null döndü");
+            return;
+        }
+
+        // 2. PharmacyId kontrolü
+        if (pharmacyId == null || pharmacyId.isEmpty()) {
+            Toast.makeText(this, "Eczane ID bulunamadı!", Toast.LENGTH_SHORT).show();
+            Log.e("InviteCode", "pharmacyId null veya boş: " + pharmacyId);
+            return;
+        }
+
+        // 3. Log ile değerleri kontrol et
+        Log.d("InviteCode", "Auth User ID: " + auth.getCurrentUser().getUid());
+        Log.d("InviteCode", "Pharmacy ID: " + pharmacyId);
+
         String code = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+        Log.d("InviteCode", "Generated Code: " + code);
 
         Map<String, Object> invitation = new HashMap<>();
-        invitation.put("code", code); // Keeping 'code' for display logic consistency if needed, but 'inviteCode' is
-
         invitation.put("inviteCode", code);
         invitation.put("pharmacyId", pharmacyId);
         invitation.put("status", "active");
-        invitation.put("createdAt", com.google.firebase.Timestamp.now());
+        invitation.put("createdAt", FieldValue.serverTimestamp());
         invitation.put("createdBy", auth.getCurrentUser().getUid());
 
-        db.collection("invitations").add(invitation)
+        Log.d("InviteCode", "Firestore'a gönderilecek data: " + invitation.toString());
+
+        // 4. Firestore instance kontrolü
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        if (db == null) {
+            Toast.makeText(this, "Firestore instance null!", Toast.LENGTH_SHORT).show();
+            Log.e("InviteCode", "Firestore getInstance() null döndü");
+            return;
+        }
+
+        db.collection("invitations")
+                .add(invitation)
                 .addOnSuccessListener(documentReference -> {
+                    Log.d("InviteCode", "✅ Başarılı! Document ID: " + documentReference.getId());
                     showInviteDialog(code);
                 })
-                .addOnFailureListener(e -> Toast.makeText(this, "Hata: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> {
+                    Log.e("InviteCode", "❌ Firestore hatası", e);
+                    Log.e("InviteCode", "Hata mesajı: " + e.getMessage());
+                    Log.e("InviteCode", "Hata tipi: " + e.getClass().getName());
+                    Toast.makeText(this, "Hata: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                });
     }
-
     private void showInviteDialog(String code) {
         new AlertDialog.Builder(this)
                 .setTitle("Davet Kodu")
@@ -161,4 +202,3 @@ public class EmployeeListActivity extends AppCompatActivity {
                 .show();
     }
 }
-

@@ -111,8 +111,8 @@ public class LoginActivity extends AppCompatActivity {
                         checkUserProfileAndNavigate();
                     } else {
                         showLoading(false);
-                        String errorMessage = getErrorMessage(task.getException());
-                        Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                        String errorMessage = AuthHelper.formatFirebaseError(task.getException());
+                        AuthHelper.showErrorDialog(LoginActivity.this, "Giriş Hatası", errorMessage);
                     }
                 });
     }
@@ -160,24 +160,6 @@ public class LoginActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
-    }
-
-    private String getErrorMessage(Exception exception) {
-        if (exception == null) return "Giriş başarısız";
-        String message = exception.getMessage();
-        if (message == null) return "Giriş başarısız";
-
-        if (message.contains("badly formatted")) {
-            return "E-posta formatı hatalı";
-        } else if (message.contains("no user record")) {
-            return "Bu e-posta adresiyle kayıtlı kullanıcı bulunamadı";
-        } else if (message.contains("password is invalid")) {
-            return "Şifre hatalı";
-        } else if (message.contains("network error")) {
-            return "İnternet bağlantınızı kontrol edin";
-        } else {
-            return "Giriş başarısız: " + message;
-        }
     }
 
     private void showLoading(boolean show) {

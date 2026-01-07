@@ -42,6 +42,7 @@ public class PrescribeMedicineActivity extends AppCompatActivity {
     private Medicine selectedMedicine;
     private String selectedPatientId;
     private String selectedPatientName;
+    private String selectedPatientIdentityNumber;
     private boolean isPatientVerified = false;
 
     @Override
@@ -152,6 +153,7 @@ public class PrescribeMedicineActivity extends AppCompatActivity {
                 cardPatientDetails.setVisibility(android.view.View.GONE);
                 selectedPatientId = null;
                 selectedPatientName = null;
+                selectedPatientIdentityNumber = null;
             }
 
             @Override
@@ -199,6 +201,7 @@ public class PrescribeMedicineActivity extends AppCompatActivity {
                                 .get(0);
                         selectedPatientId = doc.getId();
                         selectedPatientName = doc.getString("fullName");
+                        selectedPatientIdentityNumber = doc.getString("identityNumber");
                         Long age = doc.getLong("age");
 
                         isPatientVerified = true;
@@ -391,4 +394,3 @@ public class PrescribeMedicineActivity extends AppCompatActivity {
                 });
     }
 }
-

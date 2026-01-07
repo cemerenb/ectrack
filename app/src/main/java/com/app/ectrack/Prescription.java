@@ -14,6 +14,7 @@ public class Prescription {
     private String usageInstructions;
     private Timestamp prescribedDate;
     private String employeeId;
+    private String identityNumber;
 
     public Prescription() {
     }
@@ -105,5 +106,12 @@ public class Prescription {
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
-}
 
+    public String getIdentityNumber() {
+        return identityNumber;
+    }
+
+    public void setIdentityNumber(String identityNumber) {
+        this.identityNumber = identityNumber;
+    }
+}

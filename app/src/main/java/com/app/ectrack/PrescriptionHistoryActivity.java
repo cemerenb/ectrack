@@ -92,7 +92,11 @@ public class PrescriptionHistoryActivity extends AppCompatActivity {
         String lowerQuery = query.toLowerCase();
 
         for (Prescription p : allPrescriptions) {
-            if (p.getPatientName() != null && p.getPatientName().toLowerCase().contains(lowerQuery)) {
+            boolean matchesName = p.getPatientName() != null && p.getPatientName().toLowerCase().contains(lowerQuery);
+            boolean matchesId = p.getIdentityNumber() != null
+                    && p.getIdentityNumber().toLowerCase().contains(lowerQuery);
+
+            if (matchesName || matchesId) {
                 filtered.add(p);
             }
         }
@@ -134,18 +138,65 @@ public class PrescriptionHistoryActivity extends AppCompatActivity {
 
                     allPrescriptions.clear();
                     if (value != null) {
+                        List<String> patientIds = new ArrayList<>();
                         for (DocumentSnapshot doc : value.getDocuments()) {
                             Prescription prescription = doc.toObject(Prescription.class);
                             if (prescription != null) {
                                 prescription.setId(doc.getId());
                                 allPrescriptions.add(prescription);
+                                if (prescription.getPatientId() != null
+                                        && !patientIds.contains(prescription.getPatientId())) {
+                                    patientIds.add(prescription.getPatientId());
+                                }
                             }
                         }
-                    }
 
-                    adapter.setPrescriptions(allPrescriptions);
-                    toggleEmptyView(allPrescriptions.isEmpty());
+                        // Fetch identity numbers for all patients
+                        fetchPatientIdentityNumbers(patientIds);
+                    } else {
+                        adapter.setPrescriptions(allPrescriptions);
+                        toggleEmptyView(allPrescriptions.isEmpty());
+                    }
                 });
+    }
+
+    private void fetchPatientIdentityNumbers(List<String> patientIds) {
+        if (patientIds.isEmpty()) {
+            adapter.setPrescriptions(allPrescriptions);
+            toggleEmptyView(allPrescriptions.isEmpty());
+            return;
+        }
+
+        // We can fetch them one by one or in batches of 10 if we use whereIn
+        // For simplicity and since there might be many patients, we'll fetch them
+        // individually
+        // and keep track of completion.
+        final int totalRows = patientIds.size();
+        final java.util.Map<String, String> idToIdentityMap = new java.util.HashMap<>();
+        final java.util.concurrent.atomic.AtomicInteger counter = new java.util.concurrent.atomic.AtomicInteger(0);
+
+        for (String pid : patientIds) {
+            db.collection("users").document(pid).get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            String identity = task.getResult().getString("identityNumber");
+                            if (identity != null) {
+                                idToIdentityMap.put(pid, identity);
+                            }
+                        }
+
+                        if (counter.incrementAndGet() == totalRows) {
+                            // All fetched, update prescriptions and notify adapter
+                            for (Prescription p : allPrescriptions) {
+                                if (p.getPatientId() != null) {
+                                    p.setIdentityNumber(idToIdentityMap.get(p.getPatientId()));
+                                }
+                            }
+                            adapter.setPrescriptions(new ArrayList<>(allPrescriptions));
+                            toggleEmptyView(allPrescriptions.isEmpty());
+                        }
+                    });
+        }
     }
 
     private void toggleEmptyView(boolean isEmpty) {
@@ -158,4 +209,3 @@ public class PrescriptionHistoryActivity extends AppCompatActivity {
         }
     }
 }
-

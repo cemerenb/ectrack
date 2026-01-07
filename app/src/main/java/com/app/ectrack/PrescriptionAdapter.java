@@ -43,12 +43,13 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textPatientName, textDate, textMedicineName;
+        TextView textPatientName, textPatientId, textDate, textMedicineName;
         TextView textDosage, textDuration, textBoxQuantity;
 
         ViewHolder(View itemView) {
             super(itemView);
             textPatientName = itemView.findViewById(R.id.textPatientName);
+            textPatientId = itemView.findViewById(R.id.textPatientId);
             textDate = itemView.findViewById(R.id.textDate);
             textMedicineName = itemView.findViewById(R.id.textMedicineName);
             textDosage = itemView.findViewById(R.id.textDosage);
@@ -58,6 +59,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
 
         void bind(Prescription prescription) {
             textPatientName.setText(prescription.getPatientName());
+            textPatientId.setText(prescription.getIdentityNumber());
             textMedicineName.setText(prescription.getMedicineName());
             textDosage.setText("Doz: " + prescription.getDosage());
             textDuration.setText("Süre: " + prescription.getDuration());
@@ -70,4 +72,3 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
         }
     }
 }
-

@@ -50,10 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Telefon"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp">
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pharmacyPhoneInput"
@@ -135,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
-                android:text="Konum (Haritadan Seçin)"
+                android:text="Konum"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

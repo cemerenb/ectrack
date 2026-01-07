@@ -75,7 +75,8 @@ public class PharmacyDashboardActivity extends AppCompatActivity {
                         }
                     }
                 })
-                .addOnFailureListener(e -> Toast.makeText(this, "Kullanıcı bilgisi alınamadı", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(
+                        e -> Toast.makeText(this, "Kullanıcı bilgisi alınamadı", Toast.LENGTH_SHORT).show());
     }
 
     private void loadPharmacyInfo(String pharmacyId) {
@@ -83,7 +84,8 @@ public class PharmacyDashboardActivity extends AppCompatActivity {
                 .addOnSuccessListener(document -> {
                     if (document.exists()) {
                         String name = document.getString("name");
-                        if (name != null) pharmacyNameText.setText(name);
+                        if (name != null)
+                            pharmacyNameText.setText(name);
                     }
                 });
     }
@@ -104,6 +106,7 @@ public class PharmacyDashboardActivity extends AppCompatActivity {
 
         cardEmployees.setOnClickListener(v -> {
             Intent intent = new Intent(PharmacyDashboardActivity.this, EmployeeListActivity.class);
+            intent.putExtra("pharmacyId", currentPharmacyId);
             startActivity(intent);
         });
 

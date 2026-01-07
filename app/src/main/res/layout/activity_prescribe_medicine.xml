@@ -305,7 +305,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="32dp"
-                android:text="İlacı Yaz ve Stoktan Düş"
+                android:text="Reçete Oluştur"
                 app:cornerRadius="8dp" />
 
         </LinearLayout>
